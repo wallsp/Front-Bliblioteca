@@ -1,32 +1,22 @@
-import { Link } from 'react-router-dom'
-import './App.css'
-import fundo from './assets/BibliotecaLG.png'
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
-export default function App(){
-  return(
-    <div className="container" style={{ backgroundImage: `url(${fundo})` }}>
+import TLLogin from "./Pages/TLLogin"
+import TLCadastro from "./Pages/TLCadastro"
 
-      <div className="login-box">
+function App() {
+  return (
+    <BrowserRouter>
 
-        <h1>BiblioEtec</h1>
+      <Routes>
 
-        <label>Login:</label>
-        <input type="text" placeholder='Insira Seu Email' />
+        <Route path="/" element={<TLLogin />} />
 
-        <label>PassWord:</label>
-        <input type="password" placeholder='Insira Sua Senha' />
+        <Route path="/cadastro" element={<TLCadastro />} />
 
-        <p className="forgot">
-          Esqueceu a Senha? <span>Clique Aqui</span>
-        </p>
-        <p className="forgot">
-        Não Tem Conta? <Link to="/cadastro">Cadastrar-se</Link>
-        </p>
+      </Routes>
 
-        <button>ENTRAR</button>
-
-      </div>
-
-    </div>
+    </BrowserRouter>
   )
 }
+
+export default App
