@@ -9,17 +9,30 @@ export default function TLCadastro(){
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [name, setUserName] = useState("")
-    const [typeuser, setTypeuser] = useState("")
+    const [typeUser, setTypeUser] = useState("")
 
-    function onSubmit(e){
-        e.preventDefault()
+async function onSubmit(e){
+    e.preventDefault()
 
-        alert("Enviado")
+    alert("Enviado")
 
-        api.post("/user",{
-            email,password,name,typeuser
+    try {
+        await api.post("/user",{
+            email,
+            password,
+            name,
+            typeuser
         })
+        alert(Response.data.Response)
+
+        setEmail("")
+        setPassword("")
+        setUserName("")
+        setTypeUser([0])
+    } catch(err) {
+        alert(`Erro ao cadastrar: ${err}`)
     }
+}
 
     return(
         <div className="container" style={{ backgroundImage: `url(${fundo})` }}>
@@ -46,13 +59,13 @@ export default function TLCadastro(){
 
                     <label className="Opcoes">
                         <input 
-                            type="radio" name="tipoUsuario" value="admin" onChange={(e) => setTypeuser(e.target.value)}/>
+                            type="radio" name="tipoUsuario" value="admin" onChange={(e) => setTypeUser(e.target.value)}/>
                         Administrador
                     </label>
 
                     <label className="Opcoes">
                         <input 
-                            type="radio"name="tipoUsuario"value="comum"onChange={(e) => setTypeuser(e.target.value)}/>
+                            type="radio"name="tipoUsuario"value="comum"onChange={(e) => setTypeUser(e.target.value)}/>
                         Comum
                     </label>
 
